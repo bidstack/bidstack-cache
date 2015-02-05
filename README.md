@@ -45,6 +45,14 @@ int main(int argc, char *argv[]) {
     qDebug() << "Value for 'key_a':" << cache->fetch("key_a");
     qDebug() << "Value for 'key_b':" << cache->fetch("key_b");
 
+    cache->store("key_c", "a special value", 1);
+
+    qDebug() << "Has 'key_c' before sleep? -" << (cache->has("key_c") ? "yes" : "no");
+
+    sleep(2);
+
+    qDebug() << "Has 'key_c' after sleep? -" << (cache->has("key_c") ? "yes" : "no");
+
     return 0;
 }
 ```

@@ -20,6 +20,7 @@ namespace Bidstack {
 
         public:
             bool store(QString key, QString data);
+            bool store(QString key, QString data, int ttl);
             bool has(QString key);
             bool remove(QString key);
             bool clear();
@@ -28,6 +29,7 @@ namespace Bidstack {
 
         private:
             bool init(QString filename);
+            uint now();
 
         private:
             QSqlDatabase m_connection;

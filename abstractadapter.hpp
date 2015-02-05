@@ -14,6 +14,7 @@ namespace Bidstack {
 
         public:
             virtual bool store(QString key, QString data) =0;
+            virtual bool store(QString key, QString data, int ttl) =0;
             virtual bool has(QString key) =0;
             virtual bool remove(QString key) =0;
             virtual bool clear() =0;
