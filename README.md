@@ -8,14 +8,14 @@ Easy to use cache library written in Qt/C++
 #include <QCoreApplication>
 #include <QDebug>
 
-#include "sqliteadapter.hpp"
+#include "sqlitecacheadapter.hpp"
 
-using namespace Bidstack;
+using namespace Bidstack::Cache;
 
 int main(int argc, char *argv[]) {
     QCoreApplication app(argc, argv);
 
-    Cache::SqliteAdapter *cache = new Cache::SqliteAdapter("cache.sqlite");
+    SqliteCacheAdapter *cache = new SqliteCacheAdapter("cache.sqlite");
 
     qDebug() << "Has 'key_a'? -" << (cache->has("key_a") ? "yes" : "no");
     qDebug() << "Has 'key_b'? -" << (cache->has("key_b") ? "yes" : "no");

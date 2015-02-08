@@ -1,18 +1,18 @@
-#ifndef BIDSTACK_CACHE_DEVNULLADAPTER_HPP
-#define BIDSTACK_CACHE_DEVNULLADAPTER_HPP
+#ifndef BIDSTACK_CACHE_DEVNULLCACHEADAPTER_HPP
+#define BIDSTACK_CACHE_DEVNULLCACHEADAPTER_HPP
 
 #include <QObject>
 
-#include "abstractadapter.hpp"
+#include "abstractcacheadapter.hpp"
 
 namespace Bidstack {
     namespace Cache {
 
-        class DevNullAdapter : public AbstractAdapter {
+        class DevNullCacheAdapter : public AbstractCacheAdapter {
             Q_OBJECT
 
         public:
-            DevNullAdapter(QObject *parent = 0);
+            DevNullCacheAdapter(QObject *parent = 0);
 
         public:
             bool store(QString key, QString data);

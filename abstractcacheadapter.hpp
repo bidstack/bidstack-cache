@@ -1,16 +1,16 @@
-#ifndef BIDSTACK_CACHE_ABSTRACTADAPTER_HPP
-#define BIDSTACK_CACHE_ABSTRACTADAPTER_HPP
+#ifndef BIDSTACK_CACHE_ABSTRACTCACHEADAPTER_HPP
+#define BIDSTACK_CACHE_ABSTRACTCACHEADAPTER_HPP
 
 #include <QObject>
 
 namespace Bidstack {
     namespace Cache {
 
-        class AbstractAdapter : public QObject {
+        class AbstractCacheAdapter : public QObject {
             Q_OBJECT
 
         public:
-            AbstractAdapter(QObject *parent = 0);
+            AbstractCacheAdapter(QObject *parent = 0);
 
         public:
             virtual bool store(QString key, QString data) =0;

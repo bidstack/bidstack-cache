@@ -1,16 +1,16 @@
-#include "sqliteadapter.hpp"
+#include "sqlitecacheadapter.hpp"
 
 #include <QDateTime>
 
 using namespace Bidstack::Cache;
 
-SqliteAdapter::SqliteAdapter(QString filename, QObject *parent) : AbstractAdapter(parent) {
+SqliteCacheAdapter::SqliteCacheAdapter(QString filename, QObject *parent) : AbstractCacheAdapter(parent) {
     if (!init(filename)) {
       throw "Could not initialize database connection!";
     }
 }
 
-bool SqliteAdapter::init(QString filename) {
+bool SqliteCacheAdapter::init(QString filename) {
     m_connection = QSqlDatabase::addDatabase("QSQLITE", "bidstack-cache");
     m_connection.setDatabaseName(filename);
 
@@ -31,11 +31,11 @@ bool SqliteAdapter::init(QString filename) {
     return !stmt.lastError().isValid();
 }
 
-bool SqliteAdapter::store(QString key, QString data) {
+bool SqliteCacheAdapter::store(QString key, QString data) {
     return store(key, data, 0);
 }
 
-bool SqliteAdapter::store(QString key, QString data, int ttl) {
+bool SqliteCacheAdapter::store(QString key, QString data, int ttl) {
     const QString sql =
       "INSERT OR REPLACE INTO cache (key, data, expires_at) "
       "VALUES (:key, :data, :expires_at)";
@@ -50,11 +50,11 @@ bool SqliteAdapter::store(QString key, QString data, int ttl) {
     return !stmt.lastError().isValid();
 }
 
-bool SqliteAdapter::has(QString key) {
+bool SqliteCacheAdapter::has(QString key) {
     return !fetch(key).isEmpty();
 }
 
-bool SqliteAdapter::remove(QString key) {
+bool SqliteCacheAdapter::remove(QString key) {
     const QString sql = "DELETE FROM cache WHERE key = :key";
 
     QSqlQuery stmt(m_connection);
@@ -65,7 +65,7 @@ bool SqliteAdapter::remove(QString key) {
     return !stmt.lastError().isValid();
 }
 
-bool SqliteAdapter::clear() {
+bool SqliteCacheAdapter::clear() {
     const QString sql = "DELETE FROM cache";
 
     QSqlQuery stmt(m_connection);
@@ -75,7 +75,7 @@ bool SqliteAdapter::clear() {
     return !stmt.lastError().isValid();
 }
 
-QString SqliteAdapter::fetch(QString key) {
+QString SqliteCacheAdapter::fetch(QString key) {
     const QString sql = "SELECT expires_at, data FROM cache WHERE key = :key";
 
     QSqlQuery stmt(m_connection);
@@ -98,10 +98,10 @@ QString SqliteAdapter::fetch(QString key) {
     return "";
 }
 
-QString SqliteAdapter::fetch(QString key, QString defaultValue) {
+QString SqliteCacheAdapter::fetch(QString key, QString defaultValue) {
     return has(key) ? fetch(key) : defaultValue;
 }
 
-uint SqliteAdapter::now() {
+uint SqliteCacheAdapter::now() {
     return QDateTime::currentDateTime().toTime_t();
 }

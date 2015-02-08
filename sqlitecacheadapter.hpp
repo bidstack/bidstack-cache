@@ -1,5 +1,5 @@
-#ifndef BIDSTACK_CACHE_SQLITEADAPTER_HPP
-#define BIDSTACK_CACHE_SQLITEADAPTER_HPP
+#ifndef BIDSTACK_CACHE_SQLITECACHEADAPTER_HPP
+#define BIDSTACK_CACHE_SQLITECACHEADAPTER_HPP
 
 #include <QObject>
 #include <QSqlDatabase>
@@ -7,16 +7,16 @@
 #include <QSqlError>
 #include <QDebug>
 
-#include "abstractadapter.hpp"
+#include "abstractcacheadapter.hpp"
 
 namespace Bidstack {
     namespace Cache {
 
-        class SqliteAdapter : public AbstractAdapter {
+        class SqliteCacheAdapter : public AbstractCacheAdapter {
             Q_OBJECT
 
         public:
-            SqliteAdapter(QString filename, QObject *parent = 0);
+            SqliteCacheAdapter(QString filename, QObject *parent = 0);
 
         public:
             bool store(QString key, QString data);
